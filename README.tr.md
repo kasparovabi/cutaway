@@ -54,7 +54,7 @@ Ayarları aç (dişli simgesi) ve şunlardan birini yapıştır.
 
 Ortam değişkeni olarak `ANTHROPIC_API_KEY` de çalışır. Kimlikler macOS Keychain'inde durur, projede diske yazılmaz.
 
-Birden çok makineye dağıtım için `scripts/embed-tokens.py` ile derlemeye token havuzu gömebilirsin. Bir token limitine takılınca Cutaway sıradakine geçer. `Secrets.plist` gitignore'dadır, token depoya hiç girmez.
+Birden çok makineye dağıtım için `scripts/embed-tokens.py` ile derlemeye token havuzu gömebilirsin (ardından `xcodegen generate` çalıştır). Bir token limitine takılınca Cutaway sıradakine geçer. `Secrets.plist` gitignore'dadır, token depoya hiç girmez.
 
 ## Notlar
 

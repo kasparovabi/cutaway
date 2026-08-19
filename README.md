@@ -56,7 +56,7 @@ Open Settings (gear icon) and paste one of:
 
 An `ANTHROPIC_API_KEY` environment variable works too. Credentials live in the macOS Keychain and are never written to disk in the project.
 
-For a fleet of machines you can embed a token pool into the build with `scripts/embed-tokens.py`; Cutaway rotates to the next token when one hits its rate limit. `Secrets.plist` is gitignored, so tokens never enter the repo.
+For a fleet of machines you can embed a token pool into the build with `scripts/embed-tokens.py`, then re-run `xcodegen generate`; Cutaway rotates to the next token when one hits its rate limit. `Secrets.plist` is gitignored, so tokens never enter the repo.
 
 ## Notes
 

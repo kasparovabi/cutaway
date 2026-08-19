@@ -33,6 +33,7 @@ def main() -> int:
 
     TARGET.write_bytes(plistlib.dumps({"TOKENS": entries}))
     TARGET.chmod(0o600)
+    print("re-run xcodegen generate before building so the file joins the project")
     print(f"embedded {len(entries)} token(s) -> {TARGET.name}")
     for entry in entries:
         print(f"  {entry['name']}: {entry['token'][:12]}… ({len(entry['token'])} chars)")

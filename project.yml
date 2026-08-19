@@ -11,9 +11,6 @@ targets:
     platform: macOS
     sources:
       - Sources/Cutaway
-      - path: Sources/Cutaway/Secrets.plist
-        optional: true
-        buildPhase: resources
     info:
       path: Sources/Cutaway/Info.plist
       properties:
