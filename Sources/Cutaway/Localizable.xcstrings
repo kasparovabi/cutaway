@@ -196,8 +196,8 @@
     "API error %lld: %@" : {
       "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "API hatası %lld: %@" } } }
     },
-    "couldn't download this clip, try another one" : {
-      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "bu klip indirilemedi, başka bir aday dene" } } }
+    "couldn't download this clip, try another one (if every clip fails, update yt-dlp)" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "bu klip indirilemedi, başka bir aday dene (hepsi başarısızsa yt-dlp'yi güncelle)" } } }
     },
     "whisper not found (brew install openai-whisper)" : {
       "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "whisper bulunamadı (brew install openai-whisper)" } } }

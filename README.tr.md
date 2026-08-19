@@ -27,15 +27,17 @@ brew install openai-whisper yt-dlp ffmpeg
 
 - Bir Anthropic kimliği (aşağıda)
 
-Uygulama açılışta eksik araçları denetler ve kurulum komutlarını gösterir.
+Uygulama açılışta eksik araçları denetler ve kurulum komutlarını gösterir. İlk transkript Whisper modelini indirir (yaklaşık 1.5 GB), o yüzden biraz sürer; sonraki koşular hızlıdır.
 
 ## Kurulum
 
-Zip'i [Releases](../../releases) sayfasından indir, aç, Applications'a sürükle. Derleme imzasız olduğu için ilk açılışta sağ tık ve Aç yolunu kullan, ya da şunu çalıştır.
+Zip'i [Releases](../../releases) sayfasından indir, aç, Applications'a sürükle. Derleme imzasız olduğu için macOS ilk açılışta izin vermez. Karantina bayrağını temizle.
 
 ```bash
 xattr -dr com.apple.quarantine /Applications/Cutaway.app
 ```
+
+Ya da bir kez açmayı dene, sonra Sistem Ayarları içindeki Gizlilik ve Güvenlik bölümünden Yine de Aç ile onayla.
 
 Kaynaktan derlemek istersen
 
@@ -53,6 +55,12 @@ Ayarları aç (dişli simgesi) ve şunlardan birini yapıştır.
 - **Claude abonelik setup token'ı** (`sk-ant-oat…`). Claude Pro ya da Max aboneliğin varsa terminalde `claude setup-token` çalıştırıp çıktıyı yapıştır. Kullanım aboneliğinden düşer. Bunun kendi hesabın için Anthropic şartlarına uyup uymadığını kontrol etmek sana düşer.
 
 Ortam değişkeni olarak `ANTHROPIC_API_KEY` de çalışır. Kimlikler macOS Keychain'inde durur, projede diske yazılmaz.
+
+Taramalar `claude-opus-5` çağırır, cümle başına iki istek. Kullandıkça-öde anahtarında uzun video masrafı büyütür. Daha ucuz model için şunu çalıştır.
+
+```bash
+defaults write com.kasparov.cutaway cutaway.model claude-sonnet-5
+```
 
 Birden çok makineye dağıtım için `scripts/embed-tokens.py` ile derlemeye token havuzu gömebilirsin (ardından `xcodegen generate` çalıştır). Bir token limitine takılınca Cutaway sıradakine geçer. `Secrets.plist` gitignore'dadır, token depoya hiç girmez.
 

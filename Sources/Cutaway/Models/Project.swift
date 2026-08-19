@@ -44,6 +44,7 @@ final class Project {
             results = [:]
             selectedSentence = nil
             transcriptState = .none
+            batchScan = .idle
             downloadFolder = url.deletingLastPathComponent()
                 .appendingPathComponent("\(name)-clips", isDirectory: true)
 
@@ -69,6 +70,7 @@ final class Project {
         Task {
             do {
                 let output = try await Transcription.run(video: url)
+                guard video?.url == url else { return }
                 language = output.language
                 sentences = output.sentences
                 selectedSentence = output.sentences.first?.id
@@ -76,6 +78,7 @@ final class Project {
                     ? .failed(String(localized: "no speech found in the video"))
                     : .ready
             } catch {
+                guard video?.url == url else { return }
                 transcriptState = .failed(error.localizedDescription)
             }
         }
@@ -93,6 +96,7 @@ final class Project {
         Task {
             for sentence in sentences {
                 if batchScan == .stopped { break }
+                guard sentences.contains(where: { $0.id == sentence.id }) else { break }
                 guard result(sentence.id).candidates.isEmpty else { continue }
                 await scan(sentence)
             }
@@ -149,12 +153,13 @@ final class Project {
     func download(_ clip: CandidateClip, sentence: Sentence) {
         guard !result(sentence.id).downloading.contains(clip.id) else { return }
         update(sentence.id) { $0.downloading.insert(clip.id) }
+        let folder = downloadFolder
 
         Task {
             do {
                 let sourceFile = try await ClipDownloader.download(clip)
                 let target = try ClipDownloader.copyForUser(
-                    sourceFile, folder: downloadFolder, sentence: sentence, clip: clip)
+                    sourceFile, folder: folder, sentence: sentence, clip: clip)
 
                 let verdict = try? await SpeechVerifier.verify(sourceFile, start: 0,
                                                                end: min(6, clip.duration))

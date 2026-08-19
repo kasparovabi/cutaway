@@ -29,15 +29,17 @@ brew install openai-whisper yt-dlp ffmpeg
 
 - An Anthropic credential (see below)
 
-The app checks for missing tools on launch and shows the install commands.
+The app checks for missing tools on launch and shows the install commands. The first transcription downloads the Whisper model (about 1.5 GB), so it takes a while; every run after that is fast.
 
 ## Install
 
-Grab the zip from [Releases](../../releases), unzip, drag to Applications. The build is unsigned, so open it the first time with right-click → Open, or run:
+Grab the zip from [Releases](../../releases), unzip, drag to Applications. The build is unsigned, so macOS will refuse to open it at first. Clear the quarantine flag:
 
 ```bash
 xattr -dr com.apple.quarantine /Applications/Cutaway.app
 ```
+
+or try to open it once, then approve it under System Settings → Privacy & Security → Open Anyway.
 
 Or build from source:
 
@@ -55,6 +57,12 @@ Open Settings (gear icon) and paste one of:
 - **Claude subscription setup token** (`sk-ant-oat…`). If you have a Claude Pro or Max subscription, run `claude setup-token` in a terminal and paste the result. Usage then counts against your subscription; whether that fits Anthropic's terms for your account is yours to check.
 
 An `ANTHROPIC_API_KEY` environment variable works too. Credentials live in the macOS Keychain and are never written to disk in the project.
+
+Scans call `claude-opus-5`, two requests per sentence, so a long video adds up on a pay-per-use key. To use a cheaper model:
+
+```bash
+defaults write com.kasparov.cutaway cutaway.model claude-sonnet-5
+```
 
 For a fleet of machines you can embed a token pool into the build with `scripts/embed-tokens.py`, then re-run `xcodegen generate`; Cutaway rotates to the next token when one hits its rate limit. `Secrets.plist` is gitignored, so tokens never enter the repo.
 

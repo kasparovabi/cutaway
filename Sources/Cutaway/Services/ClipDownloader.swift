@@ -57,7 +57,8 @@ enum ClipDownloader {
         try FileManager.default.createDirectory(at: targetFolder, withIntermediateDirectories: true)
 
         let stamp = String(format: "%02dm%02ds", Int(sentence.start) / 60, Int(sentence.start) % 60)
-        let target = targetFolder.appendingPathComponent("\(stamp)-\(sanitized(clip.title)).mp4")
+        let base = sanitized(clip.title)
+        let target = targetFolder.appendingPathComponent("\(stamp)-\(base.isEmpty ? clip.id : base).mp4")
         if FileManager.default.fileExists(atPath: target.path) { return target }
         try FileManager.default.copyItem(at: file, to: target)
         return target
@@ -127,6 +128,6 @@ enum ClipError: LocalizedError {
     case downloadFailed
 
     var errorDescription: String? {
-        String(localized: "couldn't download this clip, try another one")
+        String(localized: "couldn't download this clip, try another one (if every clip fails, update yt-dlp)")
     }
 }
