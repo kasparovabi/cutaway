@@ -113,6 +113,7 @@ final class Project {
         update(sentence.id) { $0.state = .intent; $0.candidates = []; $0.intent = nil }
 
         do {
+            try await YtDlp.ensure()
             let intent = try await IntentEngine.makeIntent(sentence: sentence.text,
                                                            language: videoLanguage)
             update(sentence.id) { $0.intent = intent; $0.state = .searching }
@@ -157,6 +158,7 @@ final class Project {
 
         Task {
             do {
+                try await YtDlp.ensure()
                 let sourceFile = try await ClipDownloader.download(clip)
                 let target = try ClipDownloader.copyForUser(
                     sourceFile, folder: folder, sentence: sentence, clip: clip)

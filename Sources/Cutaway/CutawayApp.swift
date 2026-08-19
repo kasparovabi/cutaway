@@ -26,6 +26,10 @@ struct CutawayApp: App {
 }
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        Task.detached { try? await YtDlp.ensure() }
+    }
+
     func application(_ application: NSApplication, open urls: [URL]) {
         guard let url = urls.first else { return }
         Task { @MainActor in await Project.shared.open(url) }

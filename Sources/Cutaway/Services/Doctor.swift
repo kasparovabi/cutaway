@@ -8,7 +8,6 @@ enum Doctor {
 
     static let required = [
         Tool(id: "whisper", install: "brew install openai-whisper"),
-        Tool(id: "yt-dlp", install: "brew install yt-dlp"),
         Tool(id: "ffmpeg", install: "brew install ffmpeg")
     ]
 

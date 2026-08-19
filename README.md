@@ -24,12 +24,12 @@ Every download also joins a local library. Future scans match against the librar
 - Command line tools:
 
 ```bash
-brew install openai-whisper yt-dlp ffmpeg
+brew install openai-whisper ffmpeg
 ```
 
 - An Anthropic credential (see below)
 
-The app checks for missing tools on launch and shows the install commands. The first transcription downloads the Whisper model (about 1.5 GB), so it takes a while; every run after that is fast.
+yt-dlp is not needed up front: Cutaway fetches the official build on first use and keeps it updated weekly (a brew copy wins when you have one). The app checks for the remaining tools on launch and shows the install commands. The first transcription downloads the Whisper model (about 1.5 GB), so it takes a while; every run after that is fast.
 
 ## Install
 
@@ -58,10 +58,10 @@ Open Settings (gear icon) and paste one of:
 
 An `ANTHROPIC_API_KEY` environment variable works too. Credentials live in the macOS Keychain and are never written to disk in the project.
 
-Scans call `claude-opus-5`, two requests per sentence, so a long video adds up on a pay-per-use key. To use a cheaper model:
+Scans call `claude-sonnet-5`, two requests per sentence. To use a different model, for example the stronger Opus:
 
 ```bash
-defaults write com.kasparov.cutaway cutaway.model claude-sonnet-5
+defaults write com.kasparov.cutaway cutaway.model claude-opus-5
 ```
 
 For a fleet of machines you can embed a token pool into the build with `scripts/embed-tokens.py`, then re-run `xcodegen generate`; Cutaway rotates to the next token when one hits its rate limit. `Secrets.plist` is gitignored, so tokens never enter the repo.

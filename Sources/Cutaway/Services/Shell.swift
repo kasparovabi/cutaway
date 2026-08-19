@@ -1,8 +1,15 @@
 import Foundation
 
 enum Shell {
+    static let managedBin: URL = {
+        let dir = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("Cutaway/bin", isDirectory: true)
+        try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+        return dir
+    }()
+
     static let toolPath =
-        "/opt/homebrew/bin:/usr/local/bin:\(NSHomeDirectory())/.local/bin:/usr/bin:/bin"
+        "\(managedBin.path):/opt/homebrew/bin:/usr/local/bin:\(NSHomeDirectory())/.local/bin:/usr/bin:/bin"
 
     static func tool(_ name: String) -> URL? {
         toolPath.split(separator: ":")

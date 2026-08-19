@@ -211,6 +211,9 @@
     "%@ failed: %@" : {
       "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "%1$@ çalışmadı: %2$@" } } }
     },
+    "couldn't download yt-dlp, check your connection" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "yt-dlp indirilemedi, bağlantını kontrol et" } } }
+    },
     "Import" : {
       "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "İçe al" } } }
     },

@@ -1,7 +1,7 @@
 import Foundation
 
 enum ModelClient {
-    static let model = UserDefaults.standard.string(forKey: "cutaway.model") ?? "claude-opus-5"
+    static let model = UserDefaults.standard.string(forKey: "cutaway.model") ?? "claude-sonnet-5"
 
     private static let claudeCodeIdentity =
         "You are Claude Code, Anthropic's official CLI for Claude."

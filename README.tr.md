@@ -22,12 +22,12 @@ Kurguladığın videoyu ver. Konuşmayı çözer, her cümleyi okur ve o cümlen
 - Komut satırı araçları
 
 ```bash
-brew install openai-whisper yt-dlp ffmpeg
+brew install openai-whisper ffmpeg
 ```
 
 - Bir Anthropic kimliği (aşağıda)
 
-Uygulama açılışta eksik araçları denetler ve kurulum komutlarını gösterir. İlk transkript Whisper modelini indirir (yaklaşık 1.5 GB), o yüzden biraz sürer; sonraki koşular hızlıdır.
+yt-dlp'yi baştan kurman gerekmez. Cutaway ilk kullanımda resmi sürümü kendisi indirir ve haftada bir günceller, sende brew kopyası varsa onu kullanır. Uygulama açılışta kalan eksik araçları denetler ve kurulum komutlarını gösterir. İlk transkript Whisper modelini indirir (yaklaşık 1.5 GB), o yüzden biraz sürer; sonraki koşular hızlıdır.
 
 ## Kurulum
 
@@ -56,10 +56,10 @@ Ayarları aç (dişli simgesi) ve şunlardan birini yapıştır.
 
 Ortam değişkeni olarak `ANTHROPIC_API_KEY` de çalışır. Kimlikler macOS Keychain'inde durur, projede diske yazılmaz.
 
-Taramalar `claude-opus-5` çağırır, cümle başına iki istek. Kullandıkça-öde anahtarında uzun video masrafı büyütür. Daha ucuz model için şunu çalıştır.
+Taramalar `claude-sonnet-5` çağırır, cümle başına iki istek. Başka bir model istersen, örneğin daha güçlü Opus için şunu çalıştır.
 
 ```bash
-defaults write com.kasparov.cutaway cutaway.model claude-sonnet-5
+defaults write com.kasparov.cutaway cutaway.model claude-opus-5
 ```
 
 Birden çok makineye dağıtım için `scripts/embed-tokens.py` ile derlemeye token havuzu gömebilirsin (ardından `xcodegen generate` çalıştır). Bir token limitine takılınca Cutaway sıradakine geçer. `Secrets.plist` gitignore'dadır, token depoya hiç girmez.
