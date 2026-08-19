@@ -1,0 +1,222 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Import Video…" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Videoyu içe al…" } } }
+    },
+    "Stop" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Durdur" } } }
+    },
+    "Library" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Kütüphane" } } }
+    },
+    "Settings" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Ayarlar" } } }
+    },
+    "Reading video" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Video okunuyor" } } }
+    },
+    "Pick the video you're editing" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Kurgulanacak videoyu seç" } } }
+    },
+    "Transcribe speech" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Konuşmayı çöz" } } }
+    },
+    "We transcribe the speech and find a clip to cut in after every sentence." : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Videonun konuşmasını çözüp her cümlenin ardına girecek klipleri buluruz." } } }
+    },
+    "Once sentences appear, each gets its own clip suggestions." : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Cümleler çıkınca her biri için klip önerileri gelir." } } }
+    },
+    "Pick a file" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Dosya seç" } } }
+    },
+    "Missing tools" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Eksik araçlar" } } }
+    },
+    "Cutaway runs these on your Mac for transcription, search, and downloads." : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Cutaway bu araçları transkript, arama ve indirme için Mac'inde çalıştırır." } } }
+    },
+    "Check again" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Yeniden kontrol et" } } }
+    },
+    "No search yet for this sentence." : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Bu cümle için henüz arama yapılmadı." } } }
+    },
+    "Open source in browser" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Kaynağı tarayıcıda aç" } } }
+    },
+    "Show in Finder" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Finder'da göster" } } }
+    },
+    "Download" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "İndir" } } }
+    },
+    "Anthropic credential" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Anthropic kimliği" } } }
+    },
+    "Save" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Kaydet" } } }
+    },
+    "Saved" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Kaydedildi" } } }
+    },
+    "model: %@" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "model: %@" } } }
+    },
+    "Search" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Ara" } } }
+    },
+    "%lld clips" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "%lld klip" } } }
+    },
+    "No transcript" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Transkript yok" } } }
+    },
+    "Transcribing…" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Transkript çıkarılıyor…" } } }
+    },
+    "Transcript ready" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Transkript hazır" } } }
+    },
+    "Transcription failed" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Transkript başarısız" } } }
+    },
+    "Reading the sentence's intent" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Cümlenin niyeti çözülüyor" } } }
+    },
+    "Searching clips" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Klipler aranıyor" } } }
+    },
+    "Measuring orientation" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Adayların yönü ölçülüyor" } } }
+    },
+    "Scoring candidates" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Adaylar puanlanıyor" } } }
+    },
+    "language unknown" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "dil bilinmiyor" } } }
+    },
+    "from library" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "kütüphaneden" } } }
+    },
+    "No video selected" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Video seçilmedi" } } }
+    },
+    "Select a video to begin" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Başlamak için bir video seç" } } }
+    },
+    "Scan all sentences" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Tüm cümleleri tara" } } }
+    },
+    "%@ · %lld sentences · %lld found · %lld downloaded" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "%@ · %lld cümle · %lld öneri · %lld indirildi" } } }
+    },
+    "Couldn't open video: %@" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Video açılamadı: %@" } } }
+    },
+    "no speech found in the video" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "videoda konuşma bulunamadı" } } }
+    },
+    "no candidate clips found" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "aday klip bulunamadı" } } }
+    },
+    "no candidate passed the language and orientation filter" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "dil ve yön filtresini geçen aday yok" } } }
+    },
+    "video duration unreadable" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "videonun süresi okunamadı" } } }
+    },
+    "%lld downloaded" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "%lld indirildi" } } }
+    },
+    "%lld found" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "%lld öneri" } } }
+    },
+    "none found" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "bulunamadı" } } }
+    },
+    "Search clips" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Klip ara" } } }
+    },
+    "Search again" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Yeniden ara" } } }
+    },
+    "vertical" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "dikey" } } }
+    },
+    "horizontal" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "yatay" } } }
+    },
+    "Credential saved. Enter a new one to replace it." : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Kimlik kayıtlı. Değiştirmek için yenisini gir." } } }
+    },
+    "Intent extraction and scoring run on this. Use an Anthropic API key (sk-ant-api…) or a Claude subscription setup token (sk-ant-oat…, created with 'claude setup-token'). Stored only in this Mac's Keychain." : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Niyet çıkarma ve puanlama bununla çalışır. Anthropic API anahtarı (sk-ant-api…) ya da Claude aboneliği setup token'ı (sk-ant-oat…, 'claude setup-token' ile üretilir) kullanabilirsin. Yalnız bu Mac'in Keychain'inde saklanır." } } }
+    },
+    "The library is empty. Every clip you download is kept here for reuse." : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Kütüphane boş. İndirdiğin her klip yeniden kullanım için burada saklanıyor." } } }
+    },
+    "No matching clips." : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Eşleşen klip yok." } } }
+    },
+    "with speech" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "konuşmalı" } } }
+    },
+    "speechless" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "konuşmasız" } } }
+    },
+    "no credential available, add one in Settings" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "kullanılabilir kimlik yok, ayarlardan ekle" } } }
+    },
+    "unreadable server response" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "sunucu yanıtı okunamadı" } } }
+    },
+    "the model returned an empty response" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "model boş yanıt döndürdü" } } }
+    },
+    "the model refused this request" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "model bu isteği reddetti" } } }
+    },
+    "rate limit reached" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "limit dolu" } } }
+    },
+    "credential invalid or expired" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "kimlik geçersiz ya da süresi dolmuş" } } }
+    },
+    "schema rejected" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "şema reddedildi" } } }
+    },
+    "all %lld credentials are rate limited, try again later" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "%lld kimliğin de limiti dolu, biraz sonra dene" } } }
+    },
+    "API error %lld" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "API hatası %lld" } } }
+    },
+    "API error %lld: %@" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "API hatası %lld: %@" } } }
+    },
+    "couldn't download this clip, try another one" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "bu klip indirilemedi, başka bir aday dene" } } }
+    },
+    "whisper not found (brew install openai-whisper)" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "whisper bulunamadı (brew install openai-whisper)" } } }
+    },
+    "whisper failed" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "whisper çalışmadı" } } }
+    },
+    "%@ not found" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "%@ bulunamadı" } } }
+    },
+    "%@ failed: %@" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "%1$@ çalışmadı: %2$@" } } }
+    },
+    "Import" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "İçe al" } } }
+    },
+    "Pick the main video you're editing" : {
+      "localizations" : { "tr" : { "stringUnit" : { "state" : "translated", "value" : "Kurgulanacak ana videoyu seç" } } }
+    }
+  },
+  "version" : "1.0"
+}

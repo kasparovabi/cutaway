@@ -1,0 +1,5 @@
+.DS_Store
+Secrets.plist
+.build/
+Cutaway.xcodeproj/
+Docs/

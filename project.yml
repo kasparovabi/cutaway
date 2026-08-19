@@ -1,0 +1,38 @@
+name: Cutaway
+options:
+  bundleIdPrefix: com.kasparov
+  developmentLanguage: en
+  deploymentTarget:
+    macOS: "14.0"
+  createIntermediateGroups: true
+targets:
+  Cutaway:
+    type: application
+    platform: macOS
+    sources:
+      - Sources/Cutaway
+      - path: Sources/Cutaway/Secrets.plist
+        optional: true
+        buildPhase: resources
+    info:
+      path: Sources/Cutaway/Info.plist
+      properties:
+        CFBundleDocumentTypes:
+          - CFBundleTypeName: Video
+            CFBundleTypeRole: Editor
+            LSHandlerRank: Alternate
+            LSItemContentTypes:
+              - public.movie
+              - public.mpeg-4
+              - com.apple.quicktime-movie
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.kasparov.cutaway
+        MARKETING_VERSION: "0.1.0"
+        CURRENT_PROJECT_VERSION: "1"
+        GENERATE_INFOPLIST_FILE: NO
+        INFOPLIST_KEY_NSHumanReadableCopyright: ""
+        INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.video
+        ENABLE_HARDENED_RUNTIME: YES
+        CODE_SIGN_STYLE: Automatic
+        SWIFT_VERSION: "5.0"
