@@ -95,6 +95,8 @@ private struct CandidateCard: View {
     let downloadedPath: URL?
     let download: () -> Void
 
+    @State private var playing = false
+
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
             Thumbnail(url: clip.thumbnail, vertical: clip.isVertical == true)
@@ -116,6 +118,15 @@ private struct CandidateCard: View {
                         Text("·")
                         Text(vertical ? String(localized: "vertical") : String(localized: "horizontal"))
                     }
+                    if let views = clip.viewsCompact {
+                        Text("·")
+                        Text("\(views) views")
+                    }
+                    if let cut = clip.cutRangeText {
+                        Text("·")
+                        Text("cut \(cut)")
+                            .foregroundStyle(Theme.Colors.accent.opacity(0.9))
+                    }
                 }
                 .font(.system(size: 10))
                 .foregroundStyle(Theme.Colors.textDim)
@@ -136,13 +147,16 @@ private struct CandidateCard: View {
                     .foregroundStyle(clip.score >= 8 ? Theme.Colors.accent : Theme.Colors.textDim)
 
                 HStack(spacing: 8) {
-                    Button { NSWorkspace.shared.open(clip.url) } label: {
+                    Button { playing = true } label: {
                         Image(systemName: "play.rectangle")
                             .font(.system(size: 13))
                             .foregroundStyle(Theme.Colors.text)
                     }
                     .buttonStyle(.plain)
-                    .help("Open source in browser")
+                    .help("Watch in app")
+                    .sheet(isPresented: $playing) {
+                        ClipPlayerSheet(clip: clip) { playing = false }
+                    }
 
                     if let downloadedPath {
                         Button { NSWorkspace.shared.activateFileViewerSelecting([downloadedPath]) } label: {

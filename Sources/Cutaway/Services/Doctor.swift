@@ -12,6 +12,9 @@ enum Doctor {
     ]
 
     static func missing() -> [Tool] {
-        required.filter { Shell.tool($0.id) == nil }
+        required.filter { tool in
+            if tool.id == "whisper", GroqTranscriber.available { return false }
+            return Shell.tool(tool.id) == nil
+        }
     }
 }

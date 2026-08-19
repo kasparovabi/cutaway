@@ -4,9 +4,11 @@ struct SettingsView: View {
     var close: () -> Void
 
     @State private var key = ""
+    @State private var groqKey = ""
     @State private var saved = false
 
     private var hasCredential: Bool { Credentials.available }
+    private var hasGroq: Bool { Credentials.groqKey != nil }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -41,10 +43,34 @@ struct SettingsView: View {
                 .padding(.vertical, 7)
                 .background(Color.white.opacity(0.08), in: Capsule())
 
+            Divider().overlay(Color.white.opacity(0.1))
+
+            Text("Groq API key (optional)")
+                .font(.system(size: 11, weight: .medium))
+                .foregroundStyle(Theme.Colors.text)
+
+            Text(hasGroq
+                 ? String(localized: "Groq key saved. Transcription can run in the cloud when whisper is missing.")
+                 : String(localized: "Transcribes in the cloud (whisper-large-v3-turbo) when local whisper is missing. Free key: console.groq.com → API Keys → Create API Key."))
+                .font(.system(size: 10))
+                .foregroundStyle(Theme.Colors.textDim)
+                .fixedSize(horizontal: false, vertical: true)
+
+            SecureField("gsk_…", text: $groqKey)
+                .textFieldStyle(.plain)
+                .font(.system(size: 12, design: .monospaced))
+                .padding(.horizontal, 10)
+                .padding(.vertical, 7)
+                .background(Color.white.opacity(0.08), in: Capsule())
+
             HStack(spacing: 10) {
                 Button("Save") {
-                    Credentials.save(key)
+                    let anthropic = key.trimmingCharacters(in: .whitespaces)
+                    let groq = groqKey.trimmingCharacters(in: .whitespaces)
+                    if !anthropic.isEmpty { Credentials.save(anthropic) }
+                    if !groq.isEmpty { Credentials.saveGroq(groq) }
                     key = ""
+                    groqKey = ""
                     saved = true
                 }
                 .buttonStyle(.plain)
@@ -53,7 +79,8 @@ struct SettingsView: View {
                 .padding(.horizontal, 16)
                 .padding(.vertical, 7)
                 .background(Theme.Colors.accent, in: Capsule())
-                .disabled(key.trimmingCharacters(in: .whitespaces).isEmpty)
+                .disabled(key.trimmingCharacters(in: .whitespaces).isEmpty
+                          && groqKey.trimmingCharacters(in: .whitespaces).isEmpty)
 
                 if saved {
                     Text("Saved")

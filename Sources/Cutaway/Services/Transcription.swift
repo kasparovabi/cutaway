@@ -7,7 +7,13 @@ enum Transcription {
     }
 
     static func run(video: URL, model: String = "large-v3-turbo") async throws -> Output {
-        guard let whisper = Shell.tool("whisper") else { throw TranscriptError.whisperMissing }
+        // The large model is the quality bar: any run that would use a smaller
+        // local model, or a Mac without whisper, goes to Groq's hosted large.
+        let localWhisper = Shell.tool("whisper")
+        if GroqTranscriber.available, localWhisper == nil || !model.hasPrefix("large") {
+            return try await GroqTranscriber.transcribe(media: video)
+        }
+        guard let whisper = localWhisper else { throw TranscriptError.whisperMissing }
         let folder = FileManager.default.temporaryDirectory
             .appendingPathComponent("cutaway-\(UUID().uuidString)")
         try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
@@ -101,7 +107,7 @@ enum TranscriptError: LocalizedError {
 
     var errorDescription: String? {
         switch self {
-        case .whisperMissing: String(localized: "whisper not found (brew install openai-whisper)")
+        case .whisperMissing: String(localized: "whisper not found (brew install openai-whisper, or add a Groq key in Settings)")
         case .failed(let detail): detail.isEmpty ? String(localized: "whisper failed") : detail
         }
     }

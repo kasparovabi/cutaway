@@ -3,3 +3,4 @@ Secrets.plist
 .build/
 Cutaway.xcodeproj/
 Docs/
+build/

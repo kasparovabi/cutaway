@@ -11,6 +11,8 @@ targets:
     platform: macOS
     sources:
       - Sources/Cutaway
+    dependencies:
+      - sdk: AVKit.framework
     info:
       path: Sources/Cutaway/Info.plist
       properties:
@@ -25,7 +27,7 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.kasparov.cutaway
-        MARKETING_VERSION: "0.1.2"
+        MARKETING_VERSION: "0.1.3"
         CURRENT_PROJECT_VERSION: "1"
         GENERATE_INFOPLIST_FILE: NO
         INFOPLIST_KEY_NSHumanReadableCopyright: ""

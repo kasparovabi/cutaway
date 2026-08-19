@@ -12,13 +12,14 @@ struct Credential {
 enum Credentials {
     private static let service = "com.kasparov.cutaway"
     private static let account = "anthropic-api-key"
+    private static let groqAccount = "groq-api-key"
     private static let lastWorkingKey = "cutaway.lastWorkingCredential"
 
     /// Order: user-entered credential → environment variable → embedded token pool.
     /// The pool may hold several tokens; exhausted ones are skipped.
     static var all: [Credential] {
         var list: [Credential] = []
-        if let saved = readKeychain(), !saved.isEmpty {
+        if let saved = readKeychain(account), !saved.isEmpty {
             list.append(Credential(name: "your credential", value: saved))
         }
         if let env = ProcessInfo.processInfo.environment["ANTHROPIC_API_KEY"], !env.isEmpty {
@@ -46,7 +47,18 @@ enum Credentials {
         UserDefaults.standard.set(credential.name, forKey: lastWorkingKey)
     }
 
-    static func save(_ value: String) {
+    static func save(_ value: String) { write(value, account: account) }
+    static func saveGroq(_ value: String) { write(value, account: groqAccount) }
+
+    static var groqKey: String? {
+        if let saved = readKeychain(groqAccount), !saved.isEmpty { return saved }
+        if let env = ProcessInfo.processInfo.environment["GROQ_API_KEY"], !env.isEmpty {
+            return env
+        }
+        return nil
+    }
+
+    private static func write(_ value: String, account: String) {
         let data = Data(value.trimmingCharacters(in: .whitespacesAndNewlines).utf8)
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
@@ -60,7 +72,7 @@ enum Credentials {
         SecItemAdd(add as CFDictionary, nil)
     }
 
-    private static func readKeychain() -> String? {
+    private static func readKeychain(_ account: String) -> String? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: service,

@@ -25,6 +25,26 @@ enum YtDlp {
         UserDefaults.standard.set(Date(), forKey: updatedAtKey)
     }
 
+    /// Direct stream address for in-app preview. HLS first: googlevideo's
+    /// progressive mp4 URLs 403 outside yt-dlp's own client, the HLS
+    /// manifests play fine in AVPlayer.
+    static func streamURL(id: String) async -> URL? {
+        let watch = "https://www.youtube.com/watch?v=\(id)"
+        let attempts: [[String]] = [
+            ["-g", "-f", "b[protocol^=m3u8]/b", "--no-playlist", watch],
+            ["-g", "-f", "b[protocol^=m3u8]/b", "--no-playlist",
+             "--extractor-args", "youtube:player_client=ios", watch]
+        ]
+        for arguments in attempts {
+            guard let output = try? await Shell.run("yt-dlp", arguments),
+                  let line = output.split(separator: "\n").first,
+                  let url = URL(string: String(line).trimmingCharacters(in: .whitespaces))
+            else { continue }
+            return url
+        }
+        return nil
+    }
+
     /// YouTube breaks old yt-dlp builds regularly; the managed copy
     /// self-updates weekly so downloads keep working without user action.
     private static func refreshIfStale() async {

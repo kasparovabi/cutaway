@@ -18,9 +18,30 @@ struct CandidateClip: Identifiable, Hashable {
     var reason: String = ""
     var width: Int?
     var height: Int?
+    var views: Int?
+    var cutStart: Double?
+    var cutEnd: Double?
 
     var languageBadge: String { language ?? String(localized: "language unknown") }
     var durationText: String { String(format: "%.0fs", duration) }
+
+    var cutRangeText: String? {
+        guard let cutStart, let cutEnd, cutEnd > cutStart else { return nil }
+        return "\(Format.minutesSeconds(cutStart))-\(Format.minutesSeconds(cutEnd))"
+    }
+
+    var viewsCompact: String? {
+        guard let views else { return nil }
+        switch views {
+        case 1_000_000...:
+            return String(format: "%.1fM", Double(views) / 1_000_000)
+                .replacingOccurrences(of: ".0M", with: "M")
+        case 1_000...:
+            return String(format: "%.0fK", Double(views) / 1_000)
+        default:
+            return "\(views)"
+        }
+    }
 
     var isVertical: Bool? {
         guard let width, let height, width > 0, height > 0 else { return nil }

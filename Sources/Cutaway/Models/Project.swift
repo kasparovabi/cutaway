@@ -120,28 +120,50 @@ final class Project {
 
             let fromLibrary = Library.shared.search(intent: intent, language: videoLanguage,
                                                     vertical: sourceIsVertical)
-            let found = await ClipSearch.search(intent: intent,
+            var found = await ClipSearch.search(intent: intent,
                                                 sources: [YouTubeSource()],
                                                 vertical: sourceIsVertical)
+            if found.count < 8 {
+                let memeIntent = SearchIntent(emotion: intent.emotion,
+                                              reaction: intent.reaction,
+                                              queries: intent.queries.map { "\($0) meme" },
+                                              speechlessOk: intent.speechlessOk)
+                let extra = await ClipSearch.search(intent: memeIntent,
+                                                    sources: [YouTubeSource()],
+                                                    vertical: sourceIsVertical)
+                let known = Set(found.map(\.id))
+                found += extra.filter { !known.contains($0.id) }
+            }
             guard !found.isEmpty || !fromLibrary.isEmpty else {
                 update(sentence.id) { $0.state = .failed(String(localized: "no candidate clips found")) }
                 return
             }
 
             update(sentence.id) { $0.state = .measuring }
-            let measured = await ClipSearch.fillDimensions(Array(found.prefix(12)))
-            let oriented = measured.filter { $0.isVertical == sourceIsVertical }
+            let measured = await ClipSearch.fillDimensions(Array(found.prefix(20)))
+            let oriented = measured.filter {
+                $0.isVertical == nil || $0.isVertical == sourceIsVertical
+            }
 
             update(sentence.id) { $0.state = .scoring }
-            let scored = try await IntentEngine.score(
+            let ranked = try await IntentEngine.score(
                 sentence: sentence.text, language: videoLanguage,
+                sentenceDuration: sentence.end - sentence.start,
                 candidates: oriented.isEmpty ? measured : oriented)
 
-            let combined = fromLibrary + scored.filter { fresh in
-                !fromLibrary.contains { $0.id == fresh.id }
+            let fresh = ranked.filter { candidate in
+                !fromLibrary.contains { $0.id == candidate.id }
             }
+            var picked = fresh.filter { $0.score >= 6 }
+                .sorted { ($0.views ?? 0) > ($1.views ?? 0) }
+            if fromLibrary.count + picked.count < 5 {
+                picked += fresh.filter { $0.score < 6 }
+                    .sorted { ($0.views ?? 0) > ($1.views ?? 0) }
+                    .prefix(5 - fromLibrary.count - picked.count)
+            }
+            let combined = Array((fromLibrary + picked).prefix(8))
             update(sentence.id) {
-                $0.candidates = Array(combined.prefix(5))
+                $0.candidates = combined
                 $0.state = combined.isEmpty
                     ? .failed(String(localized: "no candidate passed the language and orientation filter"))
                     : .ready

@@ -7,7 +7,9 @@ protocol ClipSource {
 
 struct YouTubeSource: ClipSource {
     let name = "YouTube"
-    var perQuery = 6
+    /// Search pages are dominated by long videos; the 90-second cap keeps only
+    /// a few per page, so fetch deep to leave a real pool after filtering.
+    var perQuery = 25
 
     func search(query: String, maxDuration: Double) async throws -> [CandidateClip] {
         let output = try await Shell.run("yt-dlp", [
@@ -15,20 +17,22 @@ struct YouTubeSource: ClipSource {
             "--flat-playlist",
             "--no-warnings",
             "--socket-timeout", "20",
-            "--print", "%(duration)s\u{1F}%(id)s\u{1F}%(title)s"
+            "--print", "%(duration)s\u{1F}%(id)s\u{1F}%(view_count)s\u{1F}%(title)s"
         ])
 
         return output.split(separator: "\n").compactMap { line in
-            let fields = line.split(separator: "\u{1F}", omittingEmptySubsequences: false)
-            guard fields.count == 3,
+            let fields = line.split(separator: "\u{1F}", maxSplits: 3,
+                                    omittingEmptySubsequences: false)
+            guard fields.count == 4,
                   let duration = Double(fields[0]), duration > 0, duration <= maxDuration,
                   let url = URL(string: "https://www.youtube.com/watch?v=\(fields[1])")
             else { return nil }
             return CandidateClip(id: String(fields[1]),
-                                 title: String(fields[2]),
+                                 title: String(fields[3]),
                                  duration: duration,
                                  source: name,
-                                 url: url)
+                                 url: url,
+                                 views: Int(fields[2]))
         }
     }
 }
@@ -70,17 +74,18 @@ enum ClipSearch {
             clip.url.absoluteString,
             "--skip-download", "--no-warnings", "--no-playlist",
             "--socket-timeout", "20",
-            "--print", "%(width)s\u{1F}%(height)s"
+            "--print", "%(width)s\u{1F}%(height)s\u{1F}%(view_count)s"
         ]) else { return clip }
 
         let fields = output.trimmingCharacters(in: .whitespacesAndNewlines)
-            .split(separator: "\u{1F}")
-        guard fields.count == 2, let width = Int(fields[0]), let height = Int(fields[1]) else {
+            .split(separator: "\u{1F}", omittingEmptySubsequences: false)
+        guard fields.count >= 2, let width = Int(fields[0]), let height = Int(fields[1]) else {
             return clip
         }
         var updated = clip
         updated.width = width
         updated.height = height
+        if fields.count >= 3, let views = Int(fields[2]) { updated.views = views }
         return updated
     }
 }
